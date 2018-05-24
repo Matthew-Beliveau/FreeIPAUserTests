@@ -19,5 +19,21 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
-
+    <profiles>
+        <profile>
+            <id>UserTests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>org.UserTests.Test</mainClass>
+                            <classpathScope>test</classpathScope>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
