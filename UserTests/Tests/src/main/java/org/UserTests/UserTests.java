@@ -133,7 +133,7 @@ public class UserTests{
         String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "ipa user-show" + getUsername()
+                "ipa user-show " + getUsername()
         };
 
         Runtime rt = Runtime.getRuntime();
