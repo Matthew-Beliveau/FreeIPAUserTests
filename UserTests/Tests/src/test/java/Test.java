@@ -1,6 +1,5 @@
 
 
-
 public class Test {
     private static final int ARRAY_SIZE = 5;
     public static void main(String args[]) throws java.io.IOException, java.lang.InterruptedException {

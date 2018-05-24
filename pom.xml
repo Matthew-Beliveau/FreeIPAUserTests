@@ -4,9 +4,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>FreeIPAUserTests</groupId>
-    <artifactId>Test-Parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-parent</artifactId>
+        <version>19</version>
+    </parent>
 
+
+    <name>FreeIPAUserTests</name>
+    <groupId>org.FreeIPAUserTests</groupId>
+    <artifactId>FreeIPAUserTests-Parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <modules>
+        <module>UserTests</module>
+    </modules>
 
 </project>
