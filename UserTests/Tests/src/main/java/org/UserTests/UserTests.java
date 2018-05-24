@@ -131,7 +131,7 @@ public class UserTests{
 
     public void showUser() throws IOException, InterruptedException {
         String[] cmd = {
-                "bin/sh",
+                "/bin/sh",
                 "-c",
                 "ipa user-show" + getUsername()
         };
@@ -144,7 +144,7 @@ public class UserTests{
 
     public void storeShowUserInFile(File file) throws IOException, InterruptedException {
         String[] cmd = {
-                "bin/sh",
+                "/bin/sh",
                 "-c",
                 "ipa user-show " + getUsername() + " >>" + file.getName()
         };
