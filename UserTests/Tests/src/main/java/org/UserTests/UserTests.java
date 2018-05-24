@@ -26,6 +26,13 @@ public class UserTests{
         createUser(u, f, l, p);
     }
 
+    public UserTests(String u, String f, String l) throws IOException, InterruptedException {
+        username = u;
+        firstName = f;
+        lastName = l;
+        createUser(u, f, l);
+    }
+
     public void createKeytab() throws IOException, InterruptedException {
         String[] cmd = {
                 "/bin/sh",
@@ -43,7 +50,7 @@ public class UserTests{
 
     /*
      *
-     * Have to use gssproxy to make the next couple of methods to work
+     * Have to use gssproxy or be a admin user to make the next couple of methods to work
      *
      */
     private void createUser(String username, String first, String last, String password) throws IOException, InterruptedException {
@@ -51,7 +58,22 @@ public class UserTests{
         String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "echo " + password + " | sudo ipa user-add " + username + " --first=" + first + " --last=" + last + " --password"
+                "echo " + password + " | ipa user-add " + username + " --first=" + first + " --last=" + last + " --password"
+        };
+
+        Runtime rt = Runtime.getRuntime();
+
+        Process p = rt.exec(cmd);
+        showOutPut(p);
+
+    }
+
+    private void createUser(String username, String first, String last) throws IOException, InterruptedException {
+
+        String[] cmd = {
+                "/bin/sh",
+                "-c",
+                "ipa user-add " + username + " --first=" + first + " --last=" + last
         };
 
         Runtime rt = Runtime.getRuntime();
@@ -66,7 +88,7 @@ public class UserTests{
         String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "echo PASSWORD | sudo ipa user-add " + username + " --first=" + firstName + " --last=" + lastName + " --password"
+                "echo PASSWORD | ipa user-add " + username + " --first=" + firstName + " --last=" + lastName + " --password"
         };
 
         Runtime rt = Runtime.getRuntime();
@@ -81,7 +103,7 @@ public class UserTests{
         String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "sudo ipa user-del " + username
+                "ipa user-del " + username
         };
 
         Runtime rt = Runtime.getRuntime();
@@ -97,13 +119,38 @@ public class UserTests{
         String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "sudo ipa user-del " + getUsername()
+                "ipa user-del " + getUsername()
         };
 
         Runtime rt = Runtime.getRuntime();
         Process p = rt.exec(cmd);
 
         showOutPut(p);
+
+    }
+
+    public void showUser() throws IOException, InterruptedException {
+        String[] cmd = {
+                "bin/sh",
+                "-c",
+                "ipa user-show" + getUsername()
+        };
+
+        Runtime rt = Runtime.getRuntime();
+        Process p = rt.exec(cmd);
+
+        showOutPut(p);
+    }
+
+    public void storeShowUserInFile(File file) throws IOException, InterruptedException {
+        String[] cmd = {
+                "bin/sh",
+                "-c",
+                "ipa user-show " + getUsername() + " >>" + file.getName()
+        };
+
+        Runtime rt = Runtime.getRuntime();
+        Process p = rt.exec(cmd);
 
     }
 
